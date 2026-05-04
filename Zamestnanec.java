@@ -1,3 +1,4 @@
-public interface Zamestnanec extends ZamestnanecBase{
+public interface Zamestnanec{
     // tady bude zaklad dovednosti
+    public abstract void pracuj();
 }
