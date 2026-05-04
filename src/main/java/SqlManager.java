@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import com.mysql.cj.jdbc.Driver;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.lang.Class;
 
 public class SqlManager extends Databaze{
 
@@ -16,11 +17,13 @@ public class SqlManager extends Databaze{
             //Connection conn = DriverManager.getConnection("jdbc:sqlite:databaze.db");
             //String cesta = System.getProperty("user.dir") + "\\databaze.db";
             //Connection conn = DriverManager.getConnection("jdbc:sqlite:" + cesta);  
-            String url = "jdbc:mysql://localhost:3306/databaze";
+            //String url = "jdbc:mysql://localhost:3306/databaze";
             String user = "root";
             String password = "root";
 
-            Connection conn = DriverManager.getConnection(url, user, password);
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databazePC2T", user, password);
             System.out.println("Připojeno k databázi databaze.db");
 
             conn.createStatement().execute("""
