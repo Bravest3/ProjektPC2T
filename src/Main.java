@@ -8,7 +8,8 @@ public class Main {
 
         System.out.println("Hello, World!");
         Scanner volbaSc = new Scanner(System.in);
-        
+        SqlManager sm = new SqlManager();
+        sm.start();
 
         while (true) {
             //tady bude hlavni menu
