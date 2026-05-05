@@ -19,6 +19,7 @@ public class Databaze {
 
     public void setSeznamZamestnancu(HashMap<Integer, ZamestnanecBase> seznamZamestnancu) {
         this.seznamZamestnancu = seznamZamestnancu;
+        this.spoluprace = spoluprace;
     }
 
     public HashMap<Integer, ZamestnanecBase> getSeznamZamestnancu() {
@@ -188,5 +189,21 @@ public class Databaze {
             }
         }
         return pocetSpolupracovniku;
+    }
+
+    public float prumernaSpoluprace(int id){
+        HashMap<Integer, UrovenSpoluprace> kolegove = spoluprace.get(id);
+        int pocetSpolupracovniku = kolegove.size();
+        float soucet = 0;
+
+        for (Integer i: kolegove.keySet()){
+            UrovenSpoluprace uroven = kolegove.get(i);
+            switch (uroven) {
+                case NIZKA -> soucet += 0;
+                case STREDNI -> soucet += 0.4;
+                case VYSOKA -> soucet += 1;
+            }
+        }
+        return soucet / (float) pocetSpolupracovniku;
     }
 }
