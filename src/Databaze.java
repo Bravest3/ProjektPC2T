@@ -100,6 +100,8 @@ public class Databaze {
         novaSpoluprace(1, 3, UrovenSpoluprace.NIZKA);
         novaSpoluprace(2, 4, UrovenSpoluprace.STREDNI);
         novaSpoluprace(3, 5, UrovenSpoluprace.VYSOKA);
+        novaSpoluprace(5, 1, UrovenSpoluprace.STREDNI);
+        novaSpoluprace(5, 2, UrovenSpoluprace.NIZKA);
 
         System.out.println("Přidáno 5 zaměstnanců do databáze.");
     }
@@ -119,7 +121,7 @@ public class Databaze {
         }
     }
 
-    public void vypis(boolean analytik) {
+    public void vypis(boolean analytik) { //mají být seřazení
         for (Map.Entry<Integer, ZamestnanecBase> entry : seznamZamestnancu.entrySet()) {
             if (analytik && entry.getValue() instanceof DatovyAnalytik) {
                 vypisZamestnance(entry.getValue().getID());
@@ -173,5 +175,18 @@ public class Databaze {
 
     public void pocetZamestnancu() {
         System.out.println("Počet zaměstnanců: " + seznamZamestnancu.size());
+    }
+
+    public int pocetSpolupraci(int id1, int id2) {
+        int pocetSpolupracovniku = 0;
+        HashMap<Integer, UrovenSpoluprace> kolegove1 = spoluprace.get(id1);
+        HashMap<Integer, UrovenSpoluprace> kolegove2 = spoluprace.get(id2);
+
+        for (Integer id3 : kolegove1.keySet()) {
+            if (kolegove2.containsKey(id3)) {
+                pocetSpolupracovniku++;
+            }
+        }
+        return pocetSpolupracovniku;
     }
 }

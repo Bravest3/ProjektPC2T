@@ -1,3 +1,5 @@
+import javax.xml.crypto.Data;
+
 public abstract class ZamestnanecBase  implements Zamestnanec {
     int id, rokNarozeni;
     String jmeno, prijmeni;
@@ -52,6 +54,6 @@ public abstract class ZamestnanecBase  implements Zamestnanec {
         return analytik;
     } */
 
-    public abstract void pracuj();
+    public abstract void pracuj(Databaze dat);
 
 }

@@ -1,3 +1,5 @@
+import javax.xml.crypto.Data;
+
 public class BezpectnostniSpecialista extends ZamestnanecBase {
     //rizikove skore (? 1/median spoluprace)
     //boolean analytik = false;
@@ -11,7 +13,7 @@ public class BezpectnostniSpecialista extends ZamestnanecBase {
         this.analytik = false;
     }
  */
-    public void pracuj() {
+    public void pracuj(Databaze dat) {
         System.out.println("Bezpečnostní specialista " + getJmeno() + " " + getPrijmeni() + " pracuje na zabezpečení dat.");
     }
 }

@@ -51,7 +51,9 @@ public class Main {
                 dat.vypisZamestnance(id);
             }
             else if (volba.equals("5")) { //spusteni dovednosti
-                
+                System.out.println("Zadejte ID zaměstnance, jehož dovednost chcete spustit: ");
+                int id = volbaSc.nextInt();
+                dat.seznamZamestnancu.get(id).pracuj(dat);
             }  
             else if (volba.equals("6")) { //vypis,
                 System.out.println("Zvolte 1 pro zobrazení datových analytiků, 2 pro zobrazení bezpečnostních specialistů: ");
