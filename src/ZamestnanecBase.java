@@ -1,6 +1,7 @@
 public abstract class ZamestnanecBase  implements Zamestnanec {
     int id, rokNarozeni;
     String jmeno, prijmeni;
+    /* Boolean analytik; */
     //seznam spolupracovniku
 
     public ZamestnanecBase(int id, int rokNarozeni, String jmeno, String prijmeni) {
@@ -8,6 +9,7 @@ public abstract class ZamestnanecBase  implements Zamestnanec {
         this.rokNarozeni = rokNarozeni;
         this.jmeno = jmeno;
         this.prijmeni = prijmeni;
+        /* this.analytik = analytik; */
     }
 
     public void setID(int id) {
@@ -26,6 +28,10 @@ public abstract class ZamestnanecBase  implements Zamestnanec {
         this.prijmeni = prijmeni;
     }
 
+    /* public void setAnalytik(Boolean analytik) {
+        this.analytik = analytik;
+    } */
+
     public int getID() {
         return id;
     }
@@ -41,6 +47,10 @@ public abstract class ZamestnanecBase  implements Zamestnanec {
      public String getPrijmeni() {
         return prijmeni;
     }
+
+    /* public Boolean getAnalytik() {
+        return analytik;
+    } */
 
     public abstract void pracuj();
 
