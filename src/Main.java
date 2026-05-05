@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 public class Main {
 
@@ -78,7 +79,26 @@ public class Main {
                 dat.vypis(volbaAnalytik == 1);
             }
             else if (volba.equals("7")) { //statistika, (neni)
+                System.out.println("Firma má " + dat.seznamZamestnancu.size() + " zaměstnanců.");
+                int pocet = 0, ctverce = 0, idSpolecnik = -1, maxPocetSpolupraci = 0;
+                for (int id : dat.seznamZamestnancu.keySet()) {
+                    pocet = pocet + dat.spoluprace.get(id).size();
+                    ctverce = ctverce + dat.spoluprace.get(id).size() * dat.spoluprace.get(id).size();
+                    if (dat.spoluprace.get(id).size() > maxPocetSpolupraci) {
+                        maxPocetSpolupraci = dat.spoluprace.get(id).size();
+                        idSpolecnik = id;
+                    }
                 }
+                float prumer = (float) pocet / (float) dat.seznamZamestnancu.size();
+                float odchylka = (float) Math.sqrt((float) ctverce / (float) dat.seznamZamestnancu.size() - prumer * prumer);
+                System.out.println("Průměrný počet spolupracovníků na zaměstnance je " + prumer);
+                System.out.println("Směrodatná odchylka počtu spolupracovníků na zaměstnance je " + odchylka);
+                if (idSpolecnik != -1) {
+                    System.out.println("Nejvíce spolupracovníků má ");
+                    dat.vypisZamestnance(idSpolecnik);
+                }
+            }
+
             else if (volba.equals("8")) {//vypis poctu (ma byt rozdeleny)
                 dat.pocetZamestnancu();
                 }
