@@ -61,7 +61,35 @@ public class Databaze {
         System.out.println("Přidáno 2 zaměstnance do databáze."); */
     } 
 
+    public void inicializace() {
+        seznamZamestnancu.put(citac, new DatovyAnalytik(citac, 1990, "Jan", "Novak"));
+        citac++;
+        seznamZamestnancu.put(citac, new BezpectnostniSpecialista(citac, 1985, "Petr", "Svoboda"));
+        citac++;
+        seznamZamestnancu.put(citac, new DatovyAnalytik(citac, 1992, "Eva", "Kralova"));
+        citac++;
+        seznamZamestnancu.put(citac, new BezpectnostniSpecialista(citac, 1988, "Martin", "Dvorak"));
+        citac++;
+        seznamZamestnancu.put(citac, new DatovyAnalytik(citac, 1995, "Lucie", "Horakova"));
+        citac++;
+        System.out.println("Přidáno 5 zaměstnanců do databáze.");
+    }
 
+    public void vypisZamestnance() {
+        System.out.println("Zadejte ID: ");
+        Scanner sc = new Scanner(System.in);
+        int id = sc.nextInt();
+        if (seznamZamestnancu.containsKey(id)) {
+            ZamestnanecBase zamestnanec = seznamZamestnancu.get(id);
+            System.out.println("ID: " + zamestnanec.getID());
+            System.out.println("Jméno: " + zamestnanec.getJmeno());
+            System.out.println("Příjmení: " + zamestnanec.getPrijmeni());
+            System.out.println("Rok narození: " + zamestnanec.getRokNarozeni());
+        }
+        else {
+            System.out.println("Zaměstnanec s ID " + id + " nenalezen.");
+        }
+    }
 
 
 }
