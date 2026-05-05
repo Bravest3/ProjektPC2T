@@ -1,4 +1,5 @@
+
 public interface Zamestnanec{
-    // tady bude zaklad dovednosti
-    public abstract void pracuj();
+    
+    public abstract void pracuj(Databaze dat);
 }

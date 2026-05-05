@@ -1,25 +1,31 @@
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.random.Random;
 
 public class Databaze {
 
     public HashMap<Integer, ZamestnanecBase> seznamZamestnancu = new HashMap<>();
+    public HashMap<Integer, HashMap<Integer, UrovenSpoluprace>> spoluprace = new HashMap<>();
 
     public enum UrovenSpoluprace {
         NIZKA,
         STREDNI,
         VYSOKA
     }
-
-    public HashMap<Integer, HashMap<Integer, UrovenSpoluprace>> spoluprace = new HashMap<>();
+    
     int citac = 1;
-    //spoluprace
+
+    public Databaze() {
+        this.seznamZamestnancu = seznamZamestnancu;
+        this.spoluprace = spoluprace;
+    }
 
     public void setSeznamZamestnancu(HashMap<Integer, ZamestnanecBase> seznamZamestnancu) {
         this.seznamZamestnancu = seznamZamestnancu;
-        this.spoluprace = spoluprace;
     }
 
     public HashMap<Integer, ZamestnanecBase> getSeznamZamestnancu() {
@@ -38,38 +44,49 @@ public class Databaze {
         while (true) {
             int id = citac, rokNarozeni;
             String jmeno, prijmeni;
-            boolean analytik;
-            Scanner volbaSc = new Scanner(System.in);
+            Scanner volbaScD = new Scanner(System.in);
             citac++;
             
             System.out.println("Zadejte křestni jméno:");
-            jmeno = volbaSc.next();
+            jmeno = volbaScD.next();
             
             System.out.println("Zadejte příjmení:");
-            prijmeni = volbaSc.next();
+            prijmeni = volbaScD.next();
             
-            System.out.println("Zadejte rok narození:");
-            rokNarozeni = volbaSc.nextInt();
+            try{
+                System.out.println("Zadejte rok narození:");
+                rokNarozeni = volbaScD.nextInt();
+            }catch (InputMismatchException e) {
+                System.out.println("Neplatný vstup pro rok narození. Zadejte znovu.");
+                continue;
+            }
 
-            System.out.println("Zvolte 1 pro bezpečnostního specialistu, 2 pro datového analytika:");
-            int volbaZamestnance = volbaSc.nextInt();
+            try{
+                System.out.println("Zvolte 1 pro bezpečnostního specialistu, 2 pro datového analytika:");
+                int volbaZamestnance = volbaScD.nextInt();
+            
 
             if (volbaZamestnance == 1) {
                 seznamZamestnancu.put(id, new BezpectnostniSpecialista(id, rokNarozeni, jmeno, prijmeni));
                 System.out.println("Vytvořen bezpečnostní specialista: " + seznamZamestnancu.get(id).getJmeno() + " " + seznamZamestnancu.get(id).getPrijmeni() + "\n ID: " + seznamZamestnancu.get(id).getID());
-                break;
             }
             else if (volbaZamestnance == 2) {
                 seznamZamestnancu.put(id, new DatovyAnalytik(id, rokNarozeni, jmeno, prijmeni));
                 System.out.println("Vytvořen datový analytik: " + jmeno + " " + prijmeni +"\n ID: " + id);
-                break;
             }
             else {
                 System.out.println("Neplatná volba zaměstnance. Zadejte znovu.");
                 continue;
             }
+            
+            }catch (InputMismatchException e) {
+                System.out.println("Neplatný vstup pro volbu zaměstnance. Zadejte znovu.");
+                continue;
+            }
 
+            //volbaScD.close();
             spoluprace.put(id, new HashMap<>());
+            break;
         }
     
     
@@ -115,6 +132,12 @@ public class Databaze {
             System.out.println("Jméno: " + zamestnanec.getJmeno());
             System.out.println("Příjmení: " + zamestnanec.getPrijmeni());
             System.out.println("Rok narození: " + zamestnanec.getRokNarozeni());
+            if(zamestnanec instanceof DatovyAnalytik) {
+                System.out.println("Zaměstnání: Datový analytik");
+            }
+            else if (zamestnanec instanceof BezpectnostniSpecialista) {
+                System.out.println("Zaměstnání: Bezpečnostní specialista");
+            }
             vypisSpoluprace(id);
         }
         else {
@@ -123,12 +146,23 @@ public class Databaze {
     }
 
     public void vypis(boolean analytik) { //mají být seřazení
-        for (Map.Entry<Integer, ZamestnanecBase> entry : seznamZamestnancu.entrySet()) {
+        /* for (Map.Entry<Integer, ZamestnanecBase> entry : seznamZamestnancu.entrySet()) {
             if (analytik && entry.getValue() instanceof DatovyAnalytik) {
                 vypisZamestnance(entry.getValue().getID());
             }
             else if (!analytik && entry.getValue() instanceof BezpectnostniSpecialista) {
                 vypisZamestnance(entry.getValue().getID());
+            }
+        } */
+        List<ZamestnanecBase> seznam = new ArrayList<>(seznamZamestnancu.values());
+        seznam.sort(Comparator.comparing(z -> z.getPrijmeni()));
+
+        for (ZamestnanecBase z : seznam) {
+            if (analytik && z instanceof DatovyAnalytik) {
+                vypisZamestnance(z.getID());
+            }
+            else if (!analytik && z instanceof BezpectnostniSpecialista) {
+                vypisZamestnance(z.getID());
             }
         }
     }
@@ -153,7 +187,6 @@ public class Databaze {
         if (seznamZamestnancu.containsKey(id1) && seznamZamestnancu.containsKey(id2)) {
             spoluprace.get(id1).put(id2, uroven);
             spoluprace.get(id2).put(id1, uroven);
-            System.out.println("Spolupráce mezi zaměstnanci " + id1 + " a " + id2 + " byla nastavena na úroveň: " + uroven);
         }
         else {
             System.out.println("Jeden nebo oba zaměstnanci nebyli nalezeni.");

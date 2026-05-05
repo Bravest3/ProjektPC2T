@@ -1,4 +1,3 @@
-import javax.xml.crypto.Data;
 
 public abstract class ZamestnanecBase  implements Zamestnanec {
     int id, rokNarozeni;
@@ -18,7 +17,7 @@ public abstract class ZamestnanecBase  implements Zamestnanec {
         this.id = id;
     }
 
-    public public void setRokNarozeni(int rokNarozeni) {
+    public void setRokNarozeni(int rokNarozeni) {
         this.rokNarozeni = rokNarozeni;
     }
 

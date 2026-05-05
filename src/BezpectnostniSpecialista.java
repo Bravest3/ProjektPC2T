@@ -1,7 +1,5 @@
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Scanner;
-
-import javax.xml.crypto.Data;
 
 public class BezpectnostniSpecialista extends ZamestnanecBase {
     //rizikove skore (? 1/median spoluprace)
@@ -28,7 +26,7 @@ public class BezpectnostniSpecialista extends ZamestnanecBase {
     public void pracuj(Databaze dat) {
         float ex;
         int n;
-        HashMap<Integer, Databaze.UrovenSpoluprace> kolegove = dat.getSpoluprace().get(this.getID());
+        //HashMap<Integer, Databaze.UrovenSpoluprace> kolegove = dat.getSpoluprace().get(this.getID());
                
         System.out.println("Zadejte ID kolegy: ");
         Scanner scanner = new Scanner(System.in);
@@ -40,5 +38,6 @@ public class BezpectnostniSpecialista extends ZamestnanecBase {
         float skore = ex * (float) n / (float) (n + 2);
 
         System.out.println("Rizikove skore: " + skore);
+        scanner.close();
         }
 }
