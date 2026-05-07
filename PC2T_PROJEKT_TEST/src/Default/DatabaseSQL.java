@@ -19,7 +19,7 @@ public class DatabaseSQL {
                     "rok INTEGER," +
                     "skupina TEXT)");
 
-            // 🔥 NOVÁ TABULKA
+            // 
             s.execute("CREATE TABLE IF NOT EXISTS spoluprace (" +
                     "id1 INTEGER," +
                     "id2 INTEGER," +
@@ -55,7 +55,7 @@ public class DatabaseSQL {
             ps1.setInt(1, id);
             ps1.executeUpdate();
 
-            // 🔥 smaž i spolupráce
+            // 
             PreparedStatement ps2 = c.prepareStatement(
                     "DELETE FROM spoluprace WHERE id1 = ? OR id2 = ?");
             ps2.setInt(1, id);
@@ -67,7 +67,7 @@ public class DatabaseSQL {
         }
     }
 
-    // 🔥 ULOŽENÍ SPOLUPRÁCE
+    //
     public static void pridejSpolupraci(int id1, int id2, String kvalita) {
         try (Connection c = DriverManager.getConnection(URL);
              PreparedStatement ps = c.prepareStatement(
@@ -84,7 +84,7 @@ public class DatabaseSQL {
         }
     }
 
-    // 🔥 NAČTENÍ VŠEHO
+    // 
     public static ArrayList<Zamestnanec> nacti() {
 
         ArrayList<Zamestnanec> list = new ArrayList<>();
@@ -93,7 +93,7 @@ public class DatabaseSQL {
         try (Connection c = DriverManager.getConnection(URL);
              Statement s = c.createStatement()) {
 
-            // 1️⃣ načti zaměstnance
+            // 
             ResultSet rs = s.executeQuery("SELECT * FROM zamestnanec");
 
             while (rs.next()) {
@@ -115,7 +115,7 @@ public class DatabaseSQL {
                 mapa.put(id, z);
             }
 
-            // 2️⃣ načti spolupráce
+            // 
             ResultSet rs2 = s.executeQuery("SELECT * FROM spoluprace");
 
             while (rs2.next()) {
