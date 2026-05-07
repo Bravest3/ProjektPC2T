@@ -44,7 +44,7 @@ public abstract class Zamestnanec {
         return spoluprace;
     }
 
-    // 🔥 abstraktní metoda
+    // 
     public abstract void provedAnalyzu();
 
     public String toString() {
