@@ -97,7 +97,7 @@ public class Main {
             z1.pridejSpolupraci(z2, k);
             z2.pridejSpolupraci(z1, k);
 
-            // 🔥 TADY JE TA JEDINÁ NOVÁ VĚC
+            // 
             if (pouzitSQL)
                 DatabaseSQL.pridejSpolupraci(id1, id2, k);
 
