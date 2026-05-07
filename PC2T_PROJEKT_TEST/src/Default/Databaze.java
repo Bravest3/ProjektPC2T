@@ -31,7 +31,7 @@ public class Databaze {
             System.out.println(z);
     }
 
-    // 🔥 OPRAVENÁ FUNKCE
+    // 
     public void vypisPodleTypu() {
 
         System.out.println("\n=== DATOVÍ ANALYTICI ===");
